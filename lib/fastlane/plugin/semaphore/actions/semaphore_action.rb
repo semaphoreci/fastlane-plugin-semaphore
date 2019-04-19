@@ -5,7 +5,14 @@ module Fastlane
   module Actions
     class SemaphoreAction < Action
       def self.run(params)
+        if Helper.ci? 
+          UI.message("Running in CI")
+        end
         UI.message("The semaphore plugin is working!")
+
+        # set up keychain
+        # switch to readonly mode
+        # set up output paths
       end
 
       def self.description
@@ -40,7 +47,7 @@ module Fastlane
         # See: https://docs.fastlane.tools/advanced/#control-configuration-by-lane-and-by-platform
         #
         # [:ios, :mac, :android].include?(platform)
-        true
+        [:ios].include?(platform)
       end
     end
   end

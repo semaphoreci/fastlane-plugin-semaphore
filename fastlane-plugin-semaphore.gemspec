@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = 'dmitry.bespalov@gnosis.pm'
 
   spec.summary       = 'Semaphore CI integration'
-  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-semaphore"
+  spec.homepage      = "https://github.com/semaphoreci/fastlane-plugin-semaphore"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)

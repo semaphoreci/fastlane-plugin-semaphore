@@ -8,9 +8,10 @@ module Fastlane
       # class methods that you define here become available in your action
       # as `Helper::SemaphoreHelper.your_method`
       #
-      def self.show_message
-        UI.message("Hello from the semaphore plugin helper!")
-      end
+      # Example:
+      # def self.show_message
+      #   UI.message("Hello from the semaphore plugin helper!")
+      # end
     end
   end
 end

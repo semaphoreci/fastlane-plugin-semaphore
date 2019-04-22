@@ -1,0 +1,12 @@
+before_all do
+  setup_semaphore
+end
+
+lane :test do
+  scan
+end
+
+lane :build do
+  match(type: "development")
+  gym
+end

@@ -9,12 +9,18 @@ module Fastlane
           UI.message("Not running on CI, skipping `#{action_name}`.")
           return
         end
+
         set_temp_keychain
         set_readonly_mode
         set_output_paths
       end
 
       def self.set_temp_keychain
+        unless Helper.mac?
+          UI.message("Skipping Keychain setup on non-macOS CI Agent")
+          return
+        end
+
         unless ENV["MATCH_KEYCHAIN_NAME"].nil?
           UI.message("Skipping Keychain setup as a keychain was already specified")
           return
@@ -51,12 +57,12 @@ module Fastlane
         ENV["GYM_OUTPUT_DIRECTORY"] = (root + "gym").to_s
         ENV["FL_BUILDLOG_PATH"] = (root + "buildlogs").to_s
         ENV["SCAN_INCLUDE_SIMULATOR_LOGS"] = true.to_s
-        
-        UI.message("Log paths set up to #{ENV["FL_OUTPUT_DIR"]}")
-        UI.message("\tscan logs: #{ENV["SCAN_OUTPUT_DIRECTORY"]}")
-        UI.message("\tgym logs: #{ENV["GYM_OUTPUT_DIRECTORY"]}")
-        UI.message("\tbuild logs: #{ENV["FL_BUILDLOG_PATH"]}")
-      end 
+
+        UI.message("Log paths set up to #{ENV['FL_OUTPUT_DIR']}")
+        UI.message("\tscan logs: #{ENV['SCAN_OUTPUT_DIRECTORY']}")
+        UI.message("\tgym logs: #{ENV['GYM_OUTPUT_DIRECTORY']}")
+        UI.message("\tbuild logs: #{ENV['FL_BUILDLOG_PATH']}")
+      end
 
       def self.description
         "Semaphore CI integration"
@@ -99,7 +105,7 @@ module Fastlane
         # See: https://docs.fastlane.tools/advanced/#control-configuration-by-lane-and-by-platform
         #
         # [:ios, :mac, :android].include?(platform)
-        [:ios, :android].include?(platform)
+        [:ios].include?(platform)
       end
     end
   end

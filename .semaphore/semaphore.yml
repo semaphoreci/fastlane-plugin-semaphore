@@ -11,4 +11,7 @@ blocks:
       - name: Run tests
         commands:
           - checkout
-          - echo "done"
+          - cache restore
+          - bundle install --path vendor/bundle
+          - cache store
+          - bundle exec rake spec

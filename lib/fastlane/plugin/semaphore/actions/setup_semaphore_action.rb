@@ -105,7 +105,7 @@ module Fastlane
         # See: https://docs.fastlane.tools/advanced/#control-configuration-by-lane-and-by-platform
         #
         # [:ios, :mac, :android].include?(platform)
-        [:ios].include?(platform)
+        [:ios, :android].include?(platform)
       end
     end
   end

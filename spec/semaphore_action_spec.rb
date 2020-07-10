@@ -12,11 +12,29 @@ describe Fastlane::Actions::SetupSemaphoreAction do
     expect(Fastlane::UI).to receive(:message).with(msg)
   end
 
+  def expect_not_in_mac_message
+    expect_message("Skipping Keychain setup on non-macOS CI Agent")
+  end
+
   describe '#run' do
     it 'skips when not in CI and not forced' do
       expect_not_in_ci_message
       expect(Fastlane::Helper).to receive(:ci?).and_return(false)
       run_action({force: false})
+    end
+  end
+
+  describe '#mac' do
+    it 'Run on mac Node' do
+      expect_message("Creating temporary keychain: \"semaphore_temporary_keychain\".")
+      expect(Fastlane::Helper).to receive(:mac?).and_return(true)
+      described_class.set_temp_keychain
+    end
+
+    it 'Fails on non-mac Node' do
+      expect_not_in_mac_message
+      expect(Fastlane::Helper).to receive(:mac?).and_return(false)
+      described_class.set_temp_keychain
     end
   end
 

@@ -57,7 +57,7 @@ describe Fastlane::Actions::SetupSemaphoreAction do
         name: described_class.default_keychain_name,
         default_keychain: true,
         unlock: true,
-        timeout: false,
+        timeout: 0,
         lock_when_sleeps: true,
         add_to_search_list: true,
         password: ""
